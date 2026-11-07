@@ -1,0 +1,43 @@
+{% extends 'loja/base.html' %}
+
+<!-- Remove o botão "Nova Peça" do menu superior nesta tela -->
+{% block nav_actions %}
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow border-0" style="background-color: white; border-radius: 15px;">
+                <div class="card-body p-4 p-md-5">
+
+                    <h3 class="fw-bold text-marinho mb-4 text-center">
+                        {% if object %}
+                        <i class="bi bi-pencil-square me-2"></i>Editar Peça
+                        {% else %}
+                        <i class="bi bi-plus-circle me-2"></i>Cadastrar Nova Peça
+                        {% endif %}
+                    </h3>
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+
+                        <div class="d-grid gap-2 mt-5">
+                            <button type="submit" class="btn btn-marinho btn-lg">
+                                <i class="bi bi-check-lg me-1"></i> Salvar Peça
+                            </button>
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

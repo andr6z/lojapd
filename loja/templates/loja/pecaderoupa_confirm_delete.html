@@ -1,0 +1,41 @@
+{% extends 'loja/base.html' %}
+
+<!-- Remove o botão "Nova Peça" do menu superior nesta tela -->
+{% block nav_actions %}
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center flex-grow-1 py-5">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card card-delete p-4 text-center mt-4">
+                <div class="icon-box">
+                    <i class="bi bi-exclamation-triangle-fill fs-1"></i>
+                </div>
+
+                <h3 class="fw-bold mb-3">Confirmar Exclusão</h3>
+
+                <p class="text-muted mb-4 fs-5">
+                    Você está prestes a apagar <strong>{{ object.nome }}</strong>. <br>
+                    Esta ação não pode ser desfeita.
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger btn-lg py-3 fw-bold">
+                            <i class="bi bi-trash3 me-1"></i> Sim, Excluir
+                        </button>
+                        <a href="{% url 'home' %}" class="btn btn-light py-3 fw-bold border">
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
