@@ -1,104 +1,199 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>Shop Homepage - Start Bootstrap Template</title>
-        
-        <link href="{% static 'loja/css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
+<html lang="pt-br">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loja Azul Marinho</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Nossas Cores Personalizadas -->
+    <style>
+        :root {
+            --azul-marinho: #0A1931;
+            /* Tom profundo de azul marinho */
+            --azul-marinho-claro: #152C55;
+            --branco-creme: #FDFBF7;
+            /* Tom suave de creme */
+            --creme-escuro: #F3EFE6;
+        }
+
+        body {
+            background-color: var(--branco-creme);
+            color: var(--azul-marinho);
+        }
+
+        /* Classes utilitárias personalizadas */
+        .bg-marinho {
+            background-color: var(--azul-marinho) !important;
+        }
+
+        .text-marinho {
+            color: var(--azul-marinho) !important;
+        }
+
+        /* Botão Marinho personalizado */
+        .btn-marinho {
+            background-color: var(--azul-marinho);
+            color: var(--branco-creme);
+            border: 2px solid var(--azul-marinho);
+            transition: all 0.3s ease;
+        }
+
+        .btn-marinho:hover {
+            background-color: var(--branco-creme);
+            color: var(--azul-marinho);
+        }
+
+        /* Botão Creme personalizado (para exclusão/destaque) */
+        .btn-creme {
+            background-color: var(--creme-escuro);
+            color: var(--azul-marinho);
+            border: 1px solid var(--azul-marinho-claro);
+        }
+
+        .btn-creme:hover {
+            background-color: var(--azul-marinho-claro);
+            color: var(--branco-creme);
+        }
+
+        /* Estilo dos Cards */
+        .card-roupa {
+            background-color: white;
+            border: 1px solid var(--creme-escuro);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(10, 25, 49, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .card-roupa:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-marinho navbar-dark py-3 shadow-sm">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+                <i class="bi bi-shop me-2"></i>Boutique Marinho
+            </a>
+            <div class="ms-auto">
+                <a href="{% url 'peca_create' %}" class="btn btn-outline-light rounded-pill px-4">
+                    <i class="bi bi-plus-lg me-1"></i> Nova Peça
+                </a>
             </div>
-        </nav>
-
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Shop in style</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-                </div>
-            </div>
-        </header>
-
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="text-center mb-5">
-             <a href="{% url 'peca_create' %}" class="btn btn-primary btn-lg">Adicionar Nova Peça</a>
         </div>
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            
-            {% for peca in roupas %}
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="{{ peca.nome }}" />
-                    
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <h5 class="fw-bolder">{{ peca.nome }}</h5>
-                            
-                            <div class="small text-muted mb-2">
-                                Tam: {{ peca.tamanho }}
-                                {% if peca.categoria %} | {{ peca.categoria.nome }} {% endif %}
+    </nav>
+
+    <!-- Header / Banner -->
+    <header class="bg-marinho py-5 mb-5" style="border-bottom: 5px solid var(--creme-escuro);">
+        <div class="container px-4 px-lg-5 my-4">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder mb-3" style="color: var(--branco-creme);">Coleção Exclusiva</h1>
+                <p class="lead fw-normal mb-0" style="color: #cbd5e1;">Elegância em cada detalhe.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Produtos -->
+    <section class="pb-5">
+        <div class="container px-4 px-lg-5">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold text-marinho">Catálogo de Produtos</h3>
+                <span class="badge bg-marinho px-3 py-2 rounded-pill">{{ roupas|length }} peças</span>
+            </div>
+
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                <!-- LOOP DO DJANGO -->
+                {% for peca in roupas %}
+                <div class="col mb-5">
+                    <div class="card card-roupa h-100 overflow-hidden">
+                        <!-- Imagem Neutra -->
+                        <div class="bg-light p-4 text-center border-bottom"
+                            style="background-color: var(--creme-escuro) !important;">
+                            <i class="bi bi-bag-heart text-marinho" style="font-size: 5rem; opacity: 0.2;"></i>
+                        </div>
+
+                        <!-- Corpo do Card -->
+                        <div class="card-body p-4 text-center">
+                            <h5 class="fw-bolder text-marinho mb-1">{{ peca.nome }}</h5>
+
+                            <div class="small text-muted mb-3">
+                                <span class="badge bg-light text-dark border">Tam: {{ peca.tamanho }}</span>
+                                {% if peca.categoria %}
+                                <span class="badge bg-light text-dark border">{{ peca.categoria.nome }}</span>
+                                {% endif %}
                             </div>
 
-                            R$ {{ peca.preco }}
-                            <div class="d-flex justify-content-center gap-2 mt-3">
-                                <a href="{% url 'peca_update' peca.pk %}" class="btn btn-warning btn-sm">Editar</a>
-                                <a href="{% url 'peca_delete' peca.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                            <div class="fs-5 fw-bold text-marinho mb-3">
+                                R$ {{ peca.preco }}
+                            </div>
+
+                            <!-- Cores (Relação N:N) -->
+                            {% if peca.cores.all %}
+                            <div class="small mb-3">
+                                <span class="text-muted"><i class="bi bi-palette"></i> Cores:</span><br>
+                                {% for cor in peca.cores.all %}
+                                <span class="badge text-bg-secondary">{{ cor.nome }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Botões de Ação -->
+                        <div class="card-footer p-3 bg-transparent border-top-0">
+                            <div class="d-flex justify-content-between gap-2">
+                                <a href="{% url 'peca_update' peca.pk %}" class="btn btn-marinho btn-sm flex-grow-1">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </a>
+                                <a href="{% url 'peca_delete' peca.pk %}"
+                                    class="btn btn-creme btn-sm flex-grow-1 text-danger border-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Ver detalhes</a></div>
+                </div>
+
+                <!-- SE ESTIVER VAZIO -->
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert text-center py-5"
+                        style="background-color: white; border: 2px dashed var(--azul-marinho-claro);">
+                        <i class="bi bi-inbox fs-1 text-marinho mb-3 d-block"></i>
+                        <h4 class="text-marinho fw-bold">O catálogo está vazio!</h4>
+                        <p class="text-muted mb-4">Que tal adicionar as primeiras roupas da sua loja?</p>
+                        <a href="{% url 'peca_create' %}" class="btn btn-marinho btn-lg rounded-pill px-5">
+                            Adicionar Produto
+                        </a>
                     </div>
                 </div>
-            </div>
-            
-            {% empty %}
-            <div class="col-12 text-center">
-                <h4 class="text-muted">Nenhuma roupa cadastrada no momento.</h4>
-                <p>Acesse o painel Admin para adicionar produtos!</p>
-            </div>
-            {% endfor %}
+                {% endfor %}
 
+            </div>
         </div>
-    </div>
-</section>source venv/bin/activate
+    </section>
 
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
+    <!-- Footer -->
+    <footer class="py-4 bg-marinho mt-auto">
+        <div class="container">
+            <p class="m-0 text-center" style="color: var(--branco-creme);">
+                &copy; 2026 Boutique Marinho. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-       <script src="js/scripts.js"></script>
-    </body>
+    <!-- Scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
